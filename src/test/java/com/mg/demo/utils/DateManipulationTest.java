@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DateManipulationTest {
     @Test
-    public void whenSundayAndFiveDaysBackItShouldReturnMonday() {
+    public void shouldReturnMondayWhenSundayAndFiveDaysBack() {
         // Given
         LocalDate date = LocalDate.of(2022, 4, 3);
 
@@ -21,7 +21,7 @@ class DateManipulationTest {
     }
 
     @Test
-    public void whenSaturdayAndFiveDaysBackItShouldReturnMonday() {
+    public void shouldReturnMondayWhenSaturdayAndFiveDaysBack() {
         // Given
         LocalDate date = LocalDate.of(2022, 4, 2);
 
@@ -33,7 +33,7 @@ class DateManipulationTest {
     }
 
     @Test
-    public void whenFridayAndFiveDaysBackItShouldReturnFriday() {
+    public void shouldReturnFridayWhenFridayAndFiveDaysBack() {
         // Given
         LocalDate date = LocalDate.of(2022, 4, 1);
 
@@ -45,7 +45,7 @@ class DateManipulationTest {
     }
 
     @Test
-    public void whenMondayAndFiveDaysBackItShouldReturnMonday() {
+    public void shouldReturnMondayWhenMondayAndFiveDaysBack() {
         // Given
         LocalDate date = LocalDate.of(2022, 4, 4);
 

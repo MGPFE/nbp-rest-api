@@ -17,9 +17,9 @@ import java.util.Map;
 
 @Service
 public class ExchangeRatesService {
-    // http://api.nbp.pl/api/
-    // http://api.nbp.pl/api/exchangerates/rates/{table}/{code}/{startDate}/{endDate}/
-    public static Map<String, Object> getExchangeRate(String code) {
+    private final String baseHttpAddress = "http://api.nbp.pl/api/exchangerates/rates/A/";
+
+    public Map<String, Object> getExchangeRate(String code) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         HttpClient client = HttpClient.newHttpClient();
         LocalDate currentBusinessDay = DateManipulation
@@ -29,8 +29,8 @@ public class ExchangeRatesService {
 
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://api.nbp.pl/api/exchangerates/rates/A/"
-                    + code + "/" + dtf.format(fiveBusinessDaysAgo) + "/" + dtf.format(currentBusinessDay) + "/"))
+                .uri(new URI(baseHttpAddress + code + "/"
+                    + dtf.format(fiveBusinessDaysAgo) + "/" + dtf.format(currentBusinessDay) + "/"))
                 .GET()
                 .build();
 
@@ -39,7 +39,6 @@ public class ExchangeRatesService {
             jsonObject.remove("table");
 
             return jsonObject.toMap();
-
         } catch (URISyntaxException | InterruptedException | IOException | JSONException e) {
             return Map.of();
         }
