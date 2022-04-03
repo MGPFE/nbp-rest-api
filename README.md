@@ -9,7 +9,7 @@ It has two available endpoints:
 
 The first endpoint fetches the exchange rate for PLN to currency specified under the [country code] for the last 5 business days.
 
-Second endpoint fetches the average gold price in PLN for last 14 business days.
+Second endpoint fetches the average gold price in PLN for the last 14 business days.
 
 ### Examples
 
