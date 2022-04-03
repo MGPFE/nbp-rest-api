@@ -54,5 +54,5 @@ Gold price
     /api/gold-price/average
 
     {
-    "average_price_last_14_business_days": 265.62
+        "average_price_last_14_business_days": 265.62
     }
