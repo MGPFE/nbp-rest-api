@@ -1,4 +1,4 @@
-package com.mg.demo.utils;
+package com.mg.nbprestapi.utils;
 
 import org.junit.jupiter.api.Test;
 

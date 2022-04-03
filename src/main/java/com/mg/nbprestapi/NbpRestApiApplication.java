@@ -1,4 +1,4 @@
-package com.mg.demo;
+package com.mg.nbprestapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.mg.demo.utils;
+package com.mg.nbprestapi.utils;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
-package com.mg.demo.controllers;
+package com.mg.nbprestapi.controllers;
 
-import com.mg.demo.services.GoldPriceService;
+import com.mg.nbprestapi.services.GoldPriceService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

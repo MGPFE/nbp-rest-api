@@ -1,9 +1,11 @@
-package com.mg.demo.controllers;
+package com.mg.nbprestapi.controllers;
 
-import com.mg.demo.services.GoldPriceService;
+import com.mg.nbprestapi.services.ExchangeRatesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
@@ -19,31 +21,33 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class GoldPriceControllerTest {
+@ExtendWith(MockitoExtension.class)
+public class ExchangeRatesControllerTest {
     @Mock
-    private GoldPriceService goldPriceService;
-    private GoldPriceController underTest;
+    private ExchangeRatesService exchangeRatesService;
+    private ExchangeRatesController underTest;
     private final String baseHttpAddress = "http://localhost:8080/api";
     private HttpClient client;
 
     @BeforeEach
     void setUp() {
         this.client = HttpClient.newHttpClient();
-        underTest = new GoldPriceController(this.goldPriceService);
+        underTest = new ExchangeRatesController(this.exchangeRatesService);
     }
 
     @Test
     public void shouldReturnStatusCode200() throws URISyntaxException, IOException, InterruptedException {
         // Given
         int desiredCode = 200;
-        String urlAppend = "/gold-price/average";
+        String urlAppend = "/exchange-rates/USD";
 
         // When
         HttpRequest request = HttpRequest.newBuilder()
             .uri(new URI(baseHttpAddress + urlAppend))
             .GET()
             .build();
-        int code = client.send(request, HttpResponse.BodyHandlers.ofString()).statusCode();
+        int code = client.send(request, HttpResponse.BodyHandlers.ofString())
+            .statusCode();
 
         // Then
         assertThat(code).isEqualTo(desiredCode);
@@ -53,7 +57,7 @@ public class GoldPriceControllerTest {
     public void shouldReturnJson() throws URISyntaxException, IOException, InterruptedException {
         // Given
         String desiredContentType = "application/json";
-        String urlAppend = "/gold-price/average";
+        String urlAppend = "/exchange-rates/USD";
 
         // When
         HttpRequest request = HttpRequest.newBuilder()
@@ -73,14 +77,36 @@ public class GoldPriceControllerTest {
     }
 
     @Test
-    public void shouldCallGetAverageGoldPriceMethodFromService() {
-        // When
-        given(goldPriceService.getAverageGoldPrice())
-            .willReturn(Map.of());
+    public void shouldReturn404WhenNoArgumentPassed() throws URISyntaxException, IOException, InterruptedException {
+        // Given
+        int desiredCode = 404;
+        String urlAppend = "/exchange-rates/";
 
-        underTest.getAverageGoldPrice();
+        // When
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(new URI(baseHttpAddress + urlAppend))
+            .GET()
+            .build();
+
+        int code = client.send(request, HttpResponse.BodyHandlers.ofString())
+            .statusCode();
 
         // Then
-        verify(goldPriceService).getAverageGoldPrice();
+        assertThat(code).isEqualTo(desiredCode);
+    }
+
+    @Test
+    public void shouldCallGetExchangeRateMethodFromService() {
+        // Given
+        String code = "USD";
+
+        // When
+        given(exchangeRatesService.getExchangeRate(code))
+            .willReturn(Map.of());
+
+        underTest.getExchangeRate(code);
+
+        // Then
+        verify(exchangeRatesService).getExchangeRate(code);
     }
 }

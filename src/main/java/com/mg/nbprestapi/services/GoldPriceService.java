@@ -1,8 +1,8 @@
-package com.mg.demo.services;
+package com.mg.nbprestapi.services;
 
 import org.springframework.web.client.RestTemplate;
+import com.mg.nbprestapi.utils.DateManipulation;
 import org.springframework.stereotype.Service;
-import com.mg.demo.utils.DateManipulation;
 import org.json.JSONObject;
 import org.json.JSONArray;
 

@@ -1,6 +1,6 @@
-package com.mg.demo.controllers;
+package com.mg.nbprestapi.controllers;
 
-import com.mg.demo.services.ExchangeRatesService;
+import com.mg.nbprestapi.services.ExchangeRatesService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
