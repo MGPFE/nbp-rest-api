@@ -1,5 +1,5 @@
 # NBP REST API
-___
+
 ### Purpose
 This project is a RESTful API which uses the NBP API to fetch data as JSON.
 
