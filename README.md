@@ -4,7 +4,7 @@ ___
 This project is a RESTful API which uses the NBP API to fetch data as JSON.
 
 It has two available endpoints:
-- /api/exchange-rates/[country code]
+- /api/exchange-rates/<b>[country code]</b>
 - /api/gold-price/average
 
 The first endpoint fetches the exchange rate for PLN to currency specified under the [country code] for the last 5 business days.
