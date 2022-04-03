@@ -1,7 +1,9 @@
 package com.mg.demo.controllers;
 
+import com.mg.demo.services.GoldPriceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
@@ -10,17 +12,24 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 public class GoldPriceControllerTest {
+    @Mock
+    private GoldPriceService goldPriceService;
+    private GoldPriceController underTest;
     private final String baseHttpAddress = "http://localhost:8080/api";
     private HttpClient client;
 
     @BeforeEach
     void setUp() {
         this.client = HttpClient.newHttpClient();
+        underTest = new GoldPriceController(goldPriceService);
     }
 
     @Test
@@ -61,5 +70,17 @@ public class GoldPriceControllerTest {
 
         // Then
         assertThat(contentType).isEqualTo(desiredContentType);
+    }
+
+    @Test
+    public void shouldCallGetAverageGoldPriceMethodFromService() {
+        // When
+        given(goldPriceService.getAverageGoldPrice())
+            .willReturn(Map.of());
+
+        underTest.getAverageGoldPrice();
+
+        // Then
+        verify(goldPriceService).getAverageGoldPrice();
     }
 }
