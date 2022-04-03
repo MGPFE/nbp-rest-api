@@ -29,7 +29,7 @@ public class GoldPriceControllerTest {
     @BeforeEach
     void setUp() {
         this.client = HttpClient.newHttpClient();
-        underTest = new GoldPriceController(goldPriceService);
+        underTest = new GoldPriceController(this.goldPriceService);
     }
 
     @Test

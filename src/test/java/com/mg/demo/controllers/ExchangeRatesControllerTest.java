@@ -33,7 +33,7 @@ public class ExchangeRatesControllerTest {
     @BeforeEach
     void setUp() {
         this.client = HttpClient.newHttpClient();
-        underTest = new ExchangeRatesController(exchangeRatesService);
+        underTest = new ExchangeRatesController(this.exchangeRatesService);
     }
 
     @Test
@@ -95,6 +95,25 @@ public class ExchangeRatesControllerTest {
         // Then
         assertThat(code).isEqualTo(desiredCode);
     }
+
+//    @Test
+//    public void shouldReturn404WhenNoArgumentPassed() throws URISyntaxException, IOException, InterruptedException {
+//        // Given
+//        int desiredCode = 404;
+//        String urlAppend = "/exchange-rates/";
+//
+//        // When
+//        HttpRequest request = HttpRequest.newBuilder()
+//            .uri(new URI(baseHttpAddress + urlAppend))
+//            .GET()
+//            .build();
+//
+//        int code = client.send(request, HttpResponse.BodyHandlers.ofString())
+//            .statusCode();
+//
+//        // Then
+//        assertThat(code).isEqualTo(desiredCode);
+//    }
 
     @Test
     public void shouldCallGetExchangeRateMethodFromService() throws URISyntaxException, IOException, InterruptedException {
